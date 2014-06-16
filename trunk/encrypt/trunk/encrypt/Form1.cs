@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,8 +23,35 @@ namespace encrypt
             //string s=encrypt.EncryptStringAES("PhanHoangNhan");
             //string a=encrypt.DecryptStringAES(s);
             //doc file text
+            try
+            {
+                var filestream = new FileStream(Path.GetDirectoryName(Environment.GetCommandLineArgs()[0]) + @"\code.txt",
+                                   FileMode.Open,
+                                   FileAccess.Read,
+                                   FileShare.ReadWrite);
+                var file = new StreamReader(filestream, Encoding.UTF8, true, 128);
+                string line;
+                StreamWriter f = null;
+            
+                string fn = Path.GetDirectoryName(Environment.GetCommandLineArgs()[0]) + @"\codemh.txt";
 
-            // ghi file text mahoa
+                f = File.CreateText(fn); // tao ra file moi                        
+               
+                while ((line = file.ReadLine()) != null)
+                {
+                    f.WriteLine(encrypt.EncryptStringAES(line));
+                }
+                if (f != null)
+                    f.Close();
+                if (filestream != null)
+                    filestream.Close();
+              
+            }
+            catch
+            {
+            }
+            MessageBox.Show("Done!");
+            
         }
     }
 }
