@@ -31,6 +31,7 @@ namespace encrypt
                                    FileShare.ReadWrite);
                 var file = new StreamReader(filestream, Encoding.UTF8, true, 128);
                 string line;
+                // khai báo file ghi f
                 StreamWriter f = null;
             
                 string fn = Path.GetDirectoryName(Environment.GetCommandLineArgs()[0]) + @"\codemh.txt";
