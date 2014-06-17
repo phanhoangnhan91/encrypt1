@@ -40,7 +40,8 @@ namespace encrypt
                
                 while ((line = file.ReadLine()) != null)
                 {
-                    f.WriteLine(encrypt.EncryptStringAES(line));
+                    String []array=line.Split('\t');
+                    f.WriteLine(encrypt.EncryptStringAES(array[0]));
                 }
                 if (f != null)
                     f.Close();
